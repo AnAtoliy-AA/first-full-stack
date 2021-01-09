@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = require('../models/User')
 const keys = require('../config/keys')
+const errorHandler = require('../utils/errorHandler')
 
 const tokenLifeTime = 3600 //one hour
 
@@ -51,7 +52,7 @@ module.exports.register = async function(req, res) {
       await user.save()
       res.status(201).json(user)
     } catch(e) {
-     
+      errorHandler(res, e)
     }
 
   }
